@@ -6,19 +6,18 @@ const login = document.querySelector('.login'),
     
 let data = {};
 
-
 btnSave.addEventListener('click', () => {
     data.login = login.value;
     data.password = password.value;
 
     const dataJson = JSON.stringify(data);
     
-    chrome.storage.local.set({[urlFile]: dataJson}).then(() => {
-        console.log(`Запись ключа: ${urlFile}, значение: ${dataJson}`);
+    chrome.storage.local.set({[url]: dataJson}).then(() => {
+        console.log(`Запись ключа: ${url}, значение: ${dataJson}`);
     });
 
-    chrome.storage.local.get([urlFile]).then((result) => {
-        console.log(`Получение ключа: ${urlFile}, значение: ${result[urlFile]}`);
+    chrome.storage.local.get([url]).then((result) => {
+        console.log(`Получение ключа: ${url}, значение: ${result[url]}`);
     });
 });
 
@@ -31,7 +30,12 @@ chrome.runtime.sendMessage({type: 'getUrl'}, function (urlPage) {
         console.error(`Сообщение не распознано: ${urlPage}`);
     } else {
         console.log(`Полученная ссылка: ${urlPage}`);
+        return urlPage;
     }
 });
 
 console.log(`Ссылка: ${urlPage}`);
+
+//Сделать считывание из файла
+//Из файла формируется объект
+//Объект импортируется в local.storage
