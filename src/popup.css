@@ -1,0 +1,11 @@
+body, html {
+    height: 600px;
+    width: 375px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-between;
+}
